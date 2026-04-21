@@ -597,11 +597,12 @@ a {
 }
 .gallery-slide {
   min-width: calc(33.333% - 14px); flex-shrink: 0; border-radius: 8px; overflow: hidden;
+  aspect-ratio: 9 / 16;
 }
 .gallery-slide img {
-  width: 100%; height: 260px; object-fit: cover; object-position: center top;
+  width: 100%; height: 100%; object-fit: contain; object-position: center;
   transition: transform 0.4s ease; display: block;
-  image-rendering: -webkit-optimize-contrast;
+  background: var(--off-white);
 }
 .gallery-slide:hover img { transform: scale(1.04); }
 .gallery-btn {
@@ -1012,12 +1013,13 @@ a {
 }
 
 .testimonial-card {
-  min-width: calc(33.333% - 16px);
+  /* largura definida via JS com base no container real do carousel */
   background: var(--white);
   padding: 32px;
   border-radius: 8px;
   border: 1px solid var(--border);
   flex-shrink: 0;
+  box-sizing: border-box;
 }
 
 .testimonial-stars {
@@ -1257,6 +1259,342 @@ a {
   font-weight: 500;
 }
 
+/* ===== STATS ===== */
+.stats {
+  background: var(--brown);
+  padding: 48px 0;
+}
+
+.stats-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 16px 48px;
+  text-align: center;
+}
+
+.stat-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.stat-plus {
+  font-size: 0.65em;
+  vertical-align: super;
+}
+
+.stat-label {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.65);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  max-width: 120px;
+  text-align: center;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 48px;
+  background: rgba(201,160,78,0.25);
+  flex-shrink: 0;
+}
+
+/* ===== HERO URGENCY BADGE ===== */
+.hero-badges {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.hero-badge--urgency {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(201,160,78,0.08);
+  border: 1px solid rgba(201,160,78,0.3);
+  color: var(--brown);
+  padding: 7px 16px;
+  border-radius: 100px;
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+.urgency-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ef4444;
+  flex-shrink: 0;
+  animation: urgencyPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes urgencyPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.5); }
+  50% { box-shadow: 0 0 0 5px rgba(239,68,68,0); }
+}
+
+/* ===== PRICE GUARANTEE ===== */
+.price-guarantee {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  background: rgba(201,160,78,0.06);
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.price-guarantee svg {
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+/* ===== FAQ ===== */
+.faq {
+  padding: 100px 0;
+  background: var(--off-white);
+}
+
+.faq-accordion {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faq-item {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--white);
+}
+
+.faq-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  padding: 20px 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s;
+}
+
+.faq-header:hover {
+  background: rgba(201,160,78,0.04);
+}
+
+.faq-question {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  color: var(--brown);
+  font-weight: 600;
+  flex: 1;
+  line-height: 1.3;
+}
+
+.faq-toggle {
+  font-size: 1.4rem;
+  color: var(--gold);
+  transition: transform 0.3s;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.faq-item.open .faq-toggle {
+  transform: rotate(45deg);
+}
+
+.faq-body {
+  display: none;
+  padding: 0 28px 24px;
+}
+
+.faq-item.open .faq-body {
+  display: block;
+}
+
+.faq-body p {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+
+.faq-cta {
+  text-align: center;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.faq-cta p {
+  font-size: 1rem;
+  color: var(--text-muted);
+}
+
+/* ===== LIGHTBOX ===== */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.92);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(4px);
+}
+
+.lightbox[hidden] {
+  display: none;
+}
+
+.lightbox-inner {
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.lightbox-inner img {
+  max-height: 80vh;
+  width: auto;
+  max-width: 100%;
+  border-radius: 8px;
+  object-fit: contain;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+}
+
+.lightbox-caption {
+  color: rgba(255,255,255,0.7);
+  font-size: 0.85rem;
+  text-align: center;
+  max-width: 400px;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  line-height: 1;
+}
+
+.lightbox-close:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.lightbox-prev { left: 20px; }
+.lightbox-next { right: 20px; }
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+  background: rgba(201,160,78,0.4);
+}
+
+/* Cursor pointer em imagens da galeria */
+.gallery-lightbox-trigger {
+  cursor: zoom-in;
+}
+
+/* ===== MOBILE CTA BAR ===== */
+.mobile-cta-bar {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-cta-bar {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 997;
+    background: var(--gold);
+    padding: 12px 20px;
+    box-shadow: 0 -4px 20px rgba(58,34,16,0.15);
+  }
+
+  .mobile-cta-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+
+  /* Dar espaço extra no footer para não ficar atrás da barra */
+  .footer {
+    padding-bottom: 80px;
+  }
+
+  /* WhatsApp flutuante sobe acima da barra mobile */
+  .whatsapp-float {
+    bottom: 80px;
+  }
+}
+
 /* ===== FOOTER ===== */
 .footer {
   background: var(--brown);
@@ -1389,10 +1727,12 @@ a {
   animation: fadeIn 0.8s ease forwards;
 }
 
+/* CORRIGIDO: reduzido de 0.6s → 0.35s e deslocamento de 24px → 16px
+   para evitar leitura impossível durante a transição */
 .fade-up {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateY(16px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
 .fade-up.visible {
@@ -1444,9 +1784,17 @@ a {
 }
 
 @media (max-width: 768px) {
+  .stat-item { padding: 12px 24px; }
+  .stat-divider { display: none; }
+  .hero-badges { align-items: center; }
+  .hero-badge--urgency { font-size: 0.75rem; }
   .about-slider { height: 300px; }
   .gallery-slide { min-width: calc(50% - 10px); }
-  .gallery-slide img { height: 220px; }
+  .faq-header { padding: 16px 20px; }
+  .faq-question { font-size: 1rem; }
+  .faq-body { padding: 0 20px 20px; }
+  .lightbox-prev { left: 8px; }
+  .lightbox-next { right: 8px; }
 
   .nav-links {
     display: none;
@@ -1525,9 +1873,7 @@ a {
     max-width: 400px;
   }
 
-  .testimonial-card {
-    min-width: calc(100% - 0px);
-  }
+  /* .testimonial-card width controlado via JS */
 
   .journey-steps {
     flex-direction: column;
