@@ -1013,12 +1013,13 @@ a {
 }
 
 .testimonial-card {
-  min-width: calc(33.333% - 16px);
+  /* largura definida via JS com base no container real do carousel */
   background: var(--white);
   padding: 32px;
   border-radius: 8px;
   border: 1px solid var(--border);
   flex-shrink: 0;
+  box-sizing: border-box;
 }
 
 .testimonial-stars {
@@ -1872,9 +1873,7 @@ a {
     max-width: 400px;
   }
 
-  .testimonial-card {
-    min-width: calc(100% - 0px);
-  }
+  /* .testimonial-card width controlado via JS */
 
   .journey-steps {
     flex-direction: column;

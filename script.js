@@ -72,14 +72,33 @@ document.querySelectorAll('.faq-header').forEach(header => {
 
 // ===== TESTIMONIALS CAROUSEL =====
 const track = document.getElementById('testimonialTrack');
-const cards = track ? track.querySelectorAll('.testimonial-card') : [];
+const cards = track ? Array.from(track.querySelectorAll('.testimonial-card')) : [];
 const dotsContainer = document.getElementById('carouselDots');
 const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
 
 if (track && cards.length > 0) {
   let currentIndex = 0;
+  const GAP = 24;
+
   const visibleCount = () => window.innerWidth <= 768 ? 1 : window.innerWidth <= 1024 ? 2 : 3;
+
+  // Calcula a largura real em px com base no container visível do carousel
+  function getCardWidth() {
+    const carousel = track.closest('.testimonials-carousel');
+    const containerWidth = carousel ? carousel.offsetWidth : track.offsetWidth;
+    const vc = visibleCount();
+    return Math.floor((containerWidth - (vc - 1) * GAP) / vc);
+  }
+
+  // Aplica width explícito em cada card para evitar o problema do % no flex pai
+  function applyCardWidths() {
+    const w = getCardWidth();
+    cards.forEach(card => {
+      card.style.minWidth = w + 'px';
+      card.style.maxWidth = w + 'px';
+    });
+  }
 
   function buildDots() {
     dotsContainer.innerHTML = '';
@@ -102,7 +121,8 @@ if (track && cards.length > 0) {
     const vc = visibleCount();
     const max = Math.ceil(cards.length / vc) - 1;
     currentIndex = Math.max(0, Math.min(index, max));
-    const cardWidth = cards[0].offsetWidth + 24;
+    // cardWidth recalculado do DOM após applyCardWidths
+    const cardWidth = cards[0].offsetWidth + GAP;
     track.style.transform = `translateX(-${currentIndex * vc * cardWidth}px)`;
     updateDots();
   }
@@ -110,9 +130,14 @@ if (track && cards.length > 0) {
   prevBtn.addEventListener('click', () => goTo(currentIndex - 1));
   nextBtn.addEventListener('click', () => goTo(currentIndex + 1));
 
+  // Init
+  applyCardWidths();
   buildDots();
+  goTo(0);
+
   window.addEventListener('resize', () => {
     currentIndex = 0;
+    applyCardWidths();
     buildDots();
     goTo(0);
   });
