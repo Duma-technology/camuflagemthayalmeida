@@ -551,11 +551,15 @@ a {
   height: 480px;
 }
 .about-slider-track {
-  display: flex; height: 100%;
+  display: flex; height: 100%; width: 100%;
   transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
 }
+.about-slider-track picture {
+  flex: 0 0 100%; height: 100%;
+  display: block; overflow: hidden;
+}
 .about-slider-track img {
-  min-width: 100%; height: 100%; object-fit: cover; flex-shrink: 0;
+  width: 100%; height: 100%; object-fit: cover; display: block;
 }
 .about-slider-btn {
   position: absolute; top: 50%; transform: translateY(-50%);
@@ -592,17 +596,19 @@ a {
   padding: 0 28px;
 }
 .gallery-track {
-  display: flex; gap: 20px;
+  display: flex; gap: 20px; width: 100%;
   transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
 }
 .gallery-slide {
-  min-width: calc(33.333% - 14px); flex-shrink: 0; border-radius: 8px; overflow: hidden;
+  flex: 0 0 calc(33.333% - 14px); border-radius: 8px; overflow: hidden;
   aspect-ratio: 9 / 16;
 }
+.gallery-slide picture {
+  display: block; width: 100%; height: 100%;
+}
 .gallery-slide img {
-  width: 100%; height: 100%; object-fit: contain; object-position: center;
+  width: 100%; height: 100%; object-fit: cover;
   transition: transform 0.4s ease; display: block;
-  background: var(--off-white);
 }
 .gallery-slide:hover img { transform: scale(1.04); }
 .gallery-btn {
@@ -1768,6 +1774,38 @@ a {
   animation-delay: 0.2s;
 }
 
+/* ===== VIDEOS SECTION ===== */
+.videos-section {
+  padding: 100px 0;
+  background: var(--nude);
+}
+
+.videos-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+
+.video-wrap {
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--brown);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.3s;
+}
+
+.video-wrap:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+.video-wrap video {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  display: block;
+  object-fit: cover;
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
   .for-who-grid {
@@ -1781,6 +1819,10 @@ a {
   .bonus-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .videos-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
@@ -1789,7 +1831,7 @@ a {
   .hero-badges { align-items: center; }
   .hero-badge--urgency { font-size: 0.75rem; }
   .about-slider { height: 300px; }
-  .gallery-slide { min-width: calc(50% - 10px); }
+  .gallery-slide { flex: 0 0 calc(50% - 10px); }
   .faq-header { padding: 16px 20px; }
   .faq-question { font-size: 1rem; }
   .faq-body { padding: 0 20px 20px; }
@@ -1925,6 +1967,10 @@ a {
     grid-template-columns: 1fr 1fr;
   }
 
+  .videos-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
   .pricing-conditions {
     flex-direction: column;
     align-items: center;
@@ -1933,7 +1979,11 @@ a {
 }
 
 @media (max-width: 480px) {
-  .gallery-slide { min-width: calc(100% - 0px); }
+  .gallery-slide { flex: 0 0 100%; }
+
+  .videos-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
   .for-who-grid {
     grid-template-columns: 1fr;
