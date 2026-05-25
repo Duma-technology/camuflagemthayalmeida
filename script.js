@@ -317,6 +317,26 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
+// ===== VIDEO THUMBNAILS =====
+document.querySelectorAll('.video-wrap video').forEach(video => {
+  video.preload = 'metadata';
+  video.addEventListener('loadedmetadata', function onMeta() {
+    video.removeEventListener('loadedmetadata', onMeta);
+    video.currentTime = 0.5;
+  });
+  video.addEventListener('seeked', function onSeeked() {
+    video.removeEventListener('seeked', onSeeked);
+    const canvas = document.createElement('canvas');
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    canvas.getContext('2d').drawImage(video, 0, 0);
+    try {
+      video.poster = canvas.toDataURL('image/jpeg', 0.75);
+    } catch (_) {}
+    video.preload = 'none';
+  });
+});
+
 // ===== MOBILE CTA BAR — ocultar no topo da página =====
 const mobileCta = document.getElementById('mobileCta');
 if (mobileCta) {
