@@ -680,6 +680,92 @@ a {
   line-height: 1.6;
 }
 
+/* ===== O QUE É CAMUFLAGEM PARAMÉDICA ===== */
+.what-is {
+  padding: 100px 0;
+  background: var(--white);
+}
+
+.what-is-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.what-is-text p {
+  color: var(--text-muted);
+  font-size: 0.97rem;
+  line-height: 1.75;
+  margin-bottom: 20px;
+}
+
+.what-is-text p:last-child {
+  margin-bottom: 0;
+}
+
+.what-is-text strong {
+  color: var(--text);
+}
+
+.what-is-types {
+  background: var(--nude);
+  border-radius: 12px;
+  padding: 36px 32px;
+}
+
+.what-is-types h3 {
+  font-size: 1.2rem;
+  color: var(--brown);
+  margin-bottom: 24px;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.what-is-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.what-is-list li {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.what-is-dot {
+  color: var(--gold);
+  font-size: 0.75rem;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.what-is-list li div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.what-is-list li strong {
+  font-size: 0.9rem;
+  color: var(--brown);
+  font-weight: 600;
+}
+
+.what-is-list li span {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .what-is-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
+
 /* ===== MODULES ===== */
 .modules {
   padding: 100px 0;
